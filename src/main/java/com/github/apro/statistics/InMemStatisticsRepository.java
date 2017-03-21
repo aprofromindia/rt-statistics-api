@@ -1,17 +1,13 @@
 package com.github.apro.statistics;
 
 import com.github.apro.transactions.Transaction;
+import java.time.Instant;
+import java.util.concurrent.ConcurrentMap;
+import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
-import java.util.concurrent.ConcurrentMap;
-
-/**
- * Created by achoudh on 20/03/2017.
- */
-
+/** Created by achoudh on 20/03/2017. */
 @Repository
 @RequiredArgsConstructor
 public class InMemStatisticsRepository implements StatisticsRepository {
@@ -19,8 +15,7 @@ public class InMemStatisticsRepository implements StatisticsRepository {
     private final ConcurrentMap<Long, Statistic> statsMap;
 
     public void add(@NotNull Transaction transaction) {
-        final long timeStamp = Instant.ofEpochMilli(transaction
-                .getTimestamp()).getEpochSecond();
+        final long timeStamp = Instant.ofEpochMilli(transaction.getTimestamp()).getEpochSecond();
 
         Statistic statistic = statsMap.getOrDefault(timeStamp, new Statistic());
         statistic.setSum(statistic.getSum() + transaction.getAmount());
@@ -35,7 +30,6 @@ public class InMemStatisticsRepository implements StatisticsRepository {
         }
     }
 
-
     @Override
     public void remove(final long secondStamp) {
         statsMap.remove(secondStamp);
@@ -44,8 +38,7 @@ public class InMemStatisticsRepository implements StatisticsRepository {
     @Override
     public Statistic getMinuteStats() {
         Statistic stats = new Statistic();
-        for (ConcurrentMap.Entry<Long, Statistic> entry :
-                statsMap.entrySet()) {
+        for (ConcurrentMap.Entry<Long, Statistic> entry : statsMap.entrySet()) {
 
             stats.setCount(stats.getCount() + 1);
             stats.setSum(stats.getSum() + entry.getValue().getSum());

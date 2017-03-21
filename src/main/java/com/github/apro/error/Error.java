@@ -3,10 +3,7 @@ package com.github.apro.error;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
-/**
- * Created by achoudh on 19/03/2017.
- */
-
+/** Created by achoudh on 19/03/2017. */
 public enum Error {
     GENERIC_ERROR(1000),
     ASYNC_ERROR(1001),

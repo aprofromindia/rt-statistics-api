@@ -18,8 +18,7 @@ public class AppConfig {
     }
 
     @Bean
-    AsyncTaskExecutor taskExecutor(){
+    AsyncTaskExecutor taskExecutor() {
         return new ThreadPoolTaskExecutor();
     }
-
 }

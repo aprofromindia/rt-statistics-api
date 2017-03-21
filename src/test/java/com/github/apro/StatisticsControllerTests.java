@@ -24,7 +24,7 @@ public class StatisticsControllerTests {
     private StatisticService service;
 
     @Test
-    public void test_statistics() {
+    public void whenGetStatistics_then200Ok() {
         given().
                 standaloneSetup(new StatisticsController(service)).
                 when().
