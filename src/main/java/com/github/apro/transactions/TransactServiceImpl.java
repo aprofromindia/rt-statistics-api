@@ -1,24 +1,24 @@
 package com.github.apro.transactions;
 
-import com.github.apro.config.AppConstants;
-import com.github.apro.statistics.StatisticsRepository;
 import java.time.Instant;
 import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class TransactServiceImpl implements TransactService {
 
-    private final StatisticsRepository repository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public void save(@NotNull Transaction transaction) {
-        if ((Instant.now().toEpochMilli() - transaction.getTimestamp())
-                        / AppConstants.MILLI_SECS_IN_SEC
-                <= AppConstants.SECS_IN_MIN) {
-            repository.add(transaction);
+        if (Instant.ofEpochMilli(transaction.getTimestamp()).isAfter(Instant.now())) {
+            eventPublisher.publishEvent(new FutureTransactionReceivedEvent(transaction));
+            log.info("published transaction - {}", transaction);
         }
     }
 }
