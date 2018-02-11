@@ -3,6 +3,6 @@ package com.github.apro.transactions;
 import lombok.Value;
 
 @Value
-public class FutureTransactionReceivedEvent {
+public class TransactionReceivedEvent {
     private Transaction transaction;
 }

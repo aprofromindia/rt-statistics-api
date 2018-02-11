@@ -1,18 +1,25 @@
 package com.github.apro.transactions;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Transaction {
-    @NotNull private Double amount;
+    @NotNull
+    private Double amount;
 
     @Min(0)
     @NotNull
     private Long timestamp;
+
+    @JsonCreator
+    public Transaction(@JsonProperty("amount") Double amount,
+                       @JsonProperty("timestamp") Long timestamp) {
+        this.amount = amount;
+        this.timestamp = timestamp;
+    }
 }

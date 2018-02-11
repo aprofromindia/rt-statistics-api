@@ -3,7 +3,9 @@ package com.github.apro.error;
 import lombok.Getter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-/** Created by achoudh on 19/03/2017. */
+/**
+ * Created by Apro.
+ */
 @Getter
 class ApiError {
     private final Error code;

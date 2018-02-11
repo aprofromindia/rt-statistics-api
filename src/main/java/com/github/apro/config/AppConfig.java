@@ -12,7 +12,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @Configuration
 @EnableScheduling
 @EnableAsync
-public class AppConfig {
+class AppConfig {
 
     @Bean
     TaskScheduler getScheduler() {

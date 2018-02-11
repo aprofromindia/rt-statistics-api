@@ -12,3 +12,5 @@ ___
 ___
 
 The API supports *HATEOAS* for seamless discoverability.
+
+- To run the project cd into the project directory and type `./gradlew clean bootRun` and then browse to `http://localhost:8080` for more information.

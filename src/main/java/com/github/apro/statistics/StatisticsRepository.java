@@ -1,6 +1,7 @@
 package com.github.apro.statistics;
 
 import com.github.apro.transactions.Transaction;
+
 import javax.validation.constraints.NotNull;
 
 public interface StatisticsRepository {

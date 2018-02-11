@@ -1,9 +1,11 @@
 package com.github.apro.statistics;
 
 import com.github.apro.config.AppConstants;
-import com.github.apro.transactions.FutureTransactionReceivedEvent;
+import com.github.apro.transactions.TransactionReceivedEvent;
 import com.github.apro.transactions.Transaction;
+
 import java.time.Instant;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -18,7 +20,7 @@ public class StatisticsRepoService {
 
     private final StatisticsRepository repository;
 
-    @Scheduled(fixedRate = AppConstants.MIN_IN_MILLI_SEC)
+    @Scheduled(fixedRate = AppConstants.SECS_IN_MILLI_SEC)
     void updateRepo() {
         long lastEpochMinInSecs = Instant.now().getEpochSecond() - AppConstants.SECS_IN_MIN;
         repository.remove(lastEpochMinInSecs);
@@ -26,7 +28,7 @@ public class StatisticsRepoService {
 
     @Async
     @EventListener
-    public void transactionReceived(final FutureTransactionReceivedEvent event) {
+    public void transactionReceived(final TransactionReceivedEvent event) {
         final Transaction transaction = event.getTransaction();
         repository.add(transaction);
         log.info("Transaction received - {}", transaction);

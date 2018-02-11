@@ -2,11 +2,14 @@ package com.github.apro.statistics;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import com.github.apro.config.AppConstants;
 import com.github.apro.transactions.Transaction;
 import com.github.apro.transactions.TransactionController;
+
 import java.util.Collections;
 import java.util.concurrent.Callable;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
@@ -28,11 +31,11 @@ public class StatisticsController {
                 new Resource<>(
                         service.getStats(),
                         linkTo(
-                                        methodOn(TransactionController.class)
-                                                .createTransaction(
-                                                        new Transaction(0.0, 0L),
-                                                        BindingResultUtils.getBindingResult(
-                                                                Collections.emptyMap(), "")))
+                                methodOn(TransactionController.class)
+                                        .createTransaction(
+                                                new Transaction(0.0, 0L),
+                                                BindingResultUtils.getBindingResult(
+                                                        Collections.emptyMap(), "")))
                                 .withRel(AppConstants.REL_TRANSACTIONS));
     }
 }

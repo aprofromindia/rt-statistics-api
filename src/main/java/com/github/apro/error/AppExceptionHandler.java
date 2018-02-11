@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @Slf4j
 @RestControllerAdvice
-public class AppExceptionHandler extends ResponseEntityExceptionHandler {
+class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(TransactionCreationException.class)
     ResponseEntity<?> handleTransactonException(

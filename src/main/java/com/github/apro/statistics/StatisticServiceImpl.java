@@ -1,9 +1,11 @@
 package com.github.apro.statistics;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class StatisticServiceImpl implements StatisticService {
 
@@ -11,6 +13,8 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public Statistic getStats() {
-        return repository.getMinuteStats();
+        final Statistic statistic = repository.getMinuteStats();
+        log.info("Computed statistic - {}", statistic);
+        return statistic;
     }
 }
